@@ -63,7 +63,6 @@ const columns = [
 ];
 
 export default class Appointments extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -98,7 +97,7 @@ export default class Appointments extends Component {
             endDate,
             clientName,
             onlyMe,
-        } = this.state.filter
+        } = this.state.filter;
 
         let filtered = data.filter(o => {
             return (startDate ? o.date >= startDate : true) &&
@@ -123,11 +122,6 @@ export default class Appointments extends Component {
                         <Form className='Appointments-FilterForm'>
                             <DateField
                                 hasTime
-                                name='startDate'
-                                value={startDate}
-                                dateFormat='dd/MM/yyyy HH:mm'
-                                timeFormat='HH:mm'
-                                placeholder='С'
                                 className='Appointments-FilterField'
                                 onChange={this.onChangeFilterDateField}
                             />

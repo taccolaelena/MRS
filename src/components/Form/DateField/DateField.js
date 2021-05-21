@@ -64,7 +64,7 @@ export default class DateField extends Component {
                         </Label>
                     ) : null}
                     <RangePicker
-                        showTime
+                        showTime={hasTime}
                         onChange={value => this.onChange(value)}
                     />
 
