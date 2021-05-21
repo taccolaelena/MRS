@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
-import Home from './components/Home/Home'
-
 import './App.scss';
+
+import Appointments from './components/Appointments/Appointments'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Home/>
+        <Appointments/>
       </div>
     );
   }
