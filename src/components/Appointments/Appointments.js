@@ -64,29 +64,32 @@ const columns = [
 
 export default class Appointments extends Component {
 
-    state = {
-        filter: {
-            startDate: null,
-            endDate: null,
-            clientName: '',
-            onlyMe: false
-        }
+    constructor(props) {
+        super(props);
+        this.state = {
+            filter: {
+                startDate: null,
+                endDate: null,
+                clientName: '',
+                onlyMe: false
+            }
+        };
     }
 
     onChangeFilterField = (name, value) => {
-        const { filter } = this.state
-
+        const { filter } = this.state;
         this.setState({
             filter: { ...filter, ...{ [name]: value } }
-        })
+        });
     }
 
     onChangeFilterDateField = (name, value) => {
-        const { filter } = this.state
-
+        const { filter } = this.state;
+        const startDate = value[0].format();
+        const endDate = value[1].format();
         this.setState({
-            filter: { ...filter, ...{ [name]: value && value.getTime() } }
-        })
+            filter: { ...filter, ...{ startDate, endDate } }
+        });
     }
 
     render() {

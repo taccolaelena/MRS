@@ -52,7 +52,6 @@ export default class Table extends Component {
     }
 
     render() {
-        console.log("<<<<<", this.props)
         const {
             data,
             columns,

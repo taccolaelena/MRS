@@ -34,11 +34,10 @@ export default class DateField extends Component {
 
     onChange = (value) => {
         const { name, onChange: cb } = this.props;
-        cn(name, value);
+        cb(name, value);
     }
 
     render() {
-        console.log("1111", this.props)
         const {
             name,
             label,
@@ -56,7 +55,7 @@ export default class DateField extends Component {
         } = this.props
 
         return (
-            
+
             <FormGroup className={cn('DateField', className)}>
                 <div>
                     {label ? (
@@ -64,7 +63,10 @@ export default class DateField extends Component {
                             {label}
                         </Label>
                     ) : null}
-                        <RangePicker showTime />
+                    <RangePicker
+                        showTime
+                        onChange={value => this.onChange(value)}
+                    />
 
                 </div>
             </FormGroup >

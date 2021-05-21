@@ -7,7 +7,6 @@ import './Header.scss';
 export default class Header extends Component {
 
   render () {
-    console.log(this.props)
     const {
       title,
       userName,
