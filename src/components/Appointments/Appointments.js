@@ -128,16 +128,6 @@ export default class Appointments extends Component {
                                 className='Appointments-FilterField'
                                 onChange={this.onChangeFilterDateField}
                             />
-                            <DateField
-                                hasTime
-                                name='endDate'
-                                value={endDate}
-                                dateFormat='dd/MM/yyyy HH:mm'
-                                timeFormat='HH:mm'
-                                placeholder='По'
-                                className='Appointments-FilterField'
-                                onChange={this.onChangeFilterDateField}
-                            />
                             <TextField
                                 name='clientName'
                                 value={clientName}

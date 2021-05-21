@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 
 import cn from 'classnames'
 import PropTypes from 'prop-types'
-import DatePicker from 'react-date-picker'
 import { FormGroup, Label } from 'reactstrap'
-
+import { DatePicker } from 'antd';
 import './DateField.scss'
+
+const { RangePicker } = DatePicker;
 
 export default class DateField extends Component {
 
@@ -55,6 +56,7 @@ export default class DateField extends Component {
         } = this.props
 
         return (
+            
             <FormGroup className={cn('DateField', className)}>
                 <div>
                     {label ? (
@@ -62,22 +64,10 @@ export default class DateField extends Component {
                             {label}
                         </Label>
                     ) : null}
-                    <DatePicker
-                        name={name}
-                        selected={value}
+                        <RangePicker showTime />
 
-                        dateFormat={dateFormat}
-
-                        timeFormat={timeFormat}
-                        showTimeSelect={hasTime}
-                        timeIntervals={timeInterval}
-
-                        onChange={this.onChange}
-                        placeholderText={placeholder}
-                        className='DateField-Input form-control'
-                    />
                 </div>
-            </FormGroup>
+            </FormGroup >
         )
     }
 }
