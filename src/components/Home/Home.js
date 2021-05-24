@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { Link } from "react-router-dom"
 import './Home.scss'
 
 import Header from '../Header/Header'
@@ -18,7 +18,7 @@ const TITLE = 'Домашняя';
 
 const SECTIONS = [
   { title: 'Приёмы', href: '/appointments', icon: appointment },
-  { title: 'События', href: '/events', icon: star  },
+  { title: 'События', href: '/events', icon: star },
   { title: 'Оповещения', href: '/notifications', icon: broadcast },
   { title: 'Сообщения', href: '/messages', icon: messages },
   { title: 'Клиенты', href: '/clients', icon: clients },
@@ -27,7 +27,7 @@ const SECTIONS = [
 
 export default class Home extends Component {
 
-  render () {
+  render() {
     return (
       <div className='Home'>
         <Header
@@ -35,16 +35,16 @@ export default class Home extends Component {
           userName='Иванов Иван Иванович'
           className='Home-Header'
           renderIcon={() => (
-            <img src={house} alt='house' className='Header-Icon'/>
+            <img src={house} alt='house' className='Header-Icon' />
           )}
         />
         <div className='Home-Body'>
           <div className='SectionNavigation'>
-            {SECTIONS.map( ({ title, href, icon }, index) => (
-              <a key={index} className='SectionNavigation-Item Section' href='#'>
-                <img src={icon} className='Section-Icon'/>
+            {SECTIONS.map(({ title, href, icon }, index) => (
+              <Link className='SectionNavigation-Item Section' to={href}>
+                <img src={icon} className='Section-Icon' />
                 <span className='Section-Title'>{title}</span>
-              </a>
+              </Link>
             ))}
           </div>
         </div>

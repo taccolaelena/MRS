@@ -70,8 +70,11 @@ export default class Appointments extends Component {
                 startDate: null,
                 endDate: null,
                 clientName: '',
-                onlyMe: false
-            }
+                onlyMe: false,
+                diagnosis: ''
+            },
+            test1: 1,
+            test2: 2
         };
     }
 
@@ -97,13 +100,15 @@ export default class Appointments extends Component {
             endDate,
             clientName,
             onlyMe,
+            diagnosis
         } = this.state.filter;
 
         let filtered = data.filter(o => {
             return (startDate ? o.date >= startDate : true) &&
                 (endDate ? o.date <= endDate : true) &&
                 (clientName ? (clientName.length > 2 ? o.clientName.includes(clientName) : true) : true) &&
-                (onlyMe ? o.holderName === USER : true)
+                (onlyMe ? o.holderName === USER : true) &&
+                (diagnosis ? (diagnosis.length > 2 ? o.diagnosis.includes(diagnosis) : true) : true)
         })
 
         return (
@@ -124,6 +129,13 @@ export default class Appointments extends Component {
                                 hasTime
                                 className='Appointments-FilterField'
                                 onChange={this.onChangeFilterDateField}
+                            />
+                            <TextField
+                                name='diagnosis'
+                                value={diagnosis}
+                                placeholder='Диагноз'
+                                className='Appointments-FilterField'
+                                onChange={this.onChangeFilterField}
                             />
                             <TextField
                                 name='clientName'

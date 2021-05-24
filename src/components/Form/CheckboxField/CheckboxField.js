@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 import cn from 'classnames'
 import PropTypes from 'prop-types'
-import {Label, Input, FormGroup} from 'reactstrap'
+import { Label, Input, FormGroup } from 'reactstrap'
 
 import './CheckboxField.scss'
 
@@ -18,7 +18,7 @@ class CheckboxField extends Component {
 
     static defaultProps = {
         value: false,
-        onChange: function () {}
+        onChange: function () { }
     }
 
     onChange = e => {
@@ -36,18 +36,18 @@ class CheckboxField extends Component {
 
         return (
             <FormGroup check className={cn('CheckboxField', className)}>
-               <Label
-                  check
-                  onClick={this.onClick}
-                  className='CheckboxField-Label'>
-                  <Input
-                      type='checkbox'
-                      value={value}
-                      onClick={this.onChange}
-                      className='CheckboxField-Checkbox'
-                  />
-                  {label}
-              </Label>
+                <Label
+                    check
+                    onClick={this.onClick}
+                    className='CheckboxField-Label'>
+                    <Input
+                        type='checkbox'
+                        value={value}
+                        onClick={this.onChange}
+                        className='CheckboxField-Checkbox'
+                    />
+                    {label}
+                </Label>
             </FormGroup>
         )
     }
