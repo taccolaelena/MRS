@@ -9,7 +9,6 @@ import TextField from '../Form/TextField/TextField'
 import DateField from '../Form/DateField/DateField'
 import CheckboxField from '../Form/CheckboxField/CheckboxField'
 import appointment from '../../images/appointment.png'
-import { appointments as data } from '../../lib/MockData'
 import { Form } from 'reactstrap'
 
 
@@ -74,6 +73,18 @@ export default function Appointments() {
         }
     );
 
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+        fetch('http://localhost:3001/api/appointments')
+            .then((response) => {
+                return response.json();
+            })
+            .then((res) => {
+              setData(res);  
+            });
+    });
+
     const onChangeFilterField = (name, value) => {
         setFilter(
             { ...filter, ...{ [name]: value } }
@@ -96,7 +107,7 @@ export default function Appointments() {
         diagnosis
     } = filter;
 
-    let filtered = data.filter(o => {
+    let filtered = data?.filter(o => {
         return (startDate ? o.date >= startDate : true) &&
             (endDate ? o.date <= endDate : true) &&
             (clientName ? (clientName.length > 2 ? o.clientName.includes(clientName) : true) : true) &&
