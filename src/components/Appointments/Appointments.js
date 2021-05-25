@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react';
 
 import Moment from 'react-moment'
 
@@ -62,104 +62,96 @@ const columns = [
     }
 ];
 
-export default class Appointments extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            filter: {
-                startDate: null,
-                endDate: null,
-                clientName: '',
-                onlyMe: false,
-                diagnosis: ''
-            },
-            test1: 1,
-            test2: 2
-        };
+export default function Appointments() {
+
+    const [filter, setFilter] = useState(
+        {
+            startDate: null,
+            endDate: null,
+            clientName: '',
+            onlyMe: false,
+            diagnosis: ''
+        }
+    );
+
+    const onChangeFilterField = (name, value) => {
+        setFilter(
+            { ...filter, ...{ [name]: value } }
+        );
     }
 
-    onChangeFilterField = (name, value) => {
-        const { filter } = this.state;
-        this.setState({
-            filter: { ...filter, ...{ [name]: value } }
-        });
-    }
-
-    onChangeFilterDateField = (name, value) => {
-        const { filter } = this.state;
+    const onChangeFilterDateField = (name, value) => {
         const startDate = value[0].format();
         const endDate = value[1].format();
-        this.setState({
-            filter: { ...filter, ...{ startDate, endDate } }
-        });
+        setFilter(
+            { ...filter, ...{ startDate, endDate } }
+        );
     }
 
-    render() {
-        const {
-            startDate,
-            endDate,
-            clientName,
-            onlyMe,
-            diagnosis
-        } = this.state.filter;
+    const {
+        startDate,
+        endDate,
+        clientName,
+        onlyMe,
+        diagnosis
+    } = filter;
 
-        let filtered = data.filter(o => {
-            return (startDate ? o.date >= startDate : true) &&
-                (endDate ? o.date <= endDate : true) &&
-                (clientName ? (clientName.length > 2 ? o.clientName.includes(clientName) : true) : true) &&
-                (onlyMe ? o.holderName === USER : true) &&
-                (diagnosis ? (diagnosis.length > 2 ? o.diagnosis.includes(diagnosis) : true) : true)
-        })
+    let filtered = data.filter(o => {
+        return (startDate ? o.date >= startDate : true) &&
+            (endDate ? o.date <= endDate : true) &&
+            (clientName ? (clientName.length > 2 ? o.clientName.includes(clientName) : true) : true) &&
+            (onlyMe ? o.holderName === USER : true) &&
+            (diagnosis ? (diagnosis.length > 2 ? o.diagnosis.includes(diagnosis) : true) : true)
+    })
 
-        return (
-            <div className='Appointments'>
-                <Header
-                    title={TITLE}
-                    userName={USER}
-                    className='Appointments-Header'
-                    bodyClassName='Appointments-HeaderBody'
-                    renderIcon={() => (
-                        <img src={appointment} className='Header-Icon' />
-                    )}
-                />
-                <div className='Appointments-Body'>
-                    <div className='Appointments-Filter'>
-                        <Form className='Appointments-FilterForm'>
-                            <DateField
-                                hasTime
-                                className='Appointments-FilterField'
-                                onChange={this.onChangeFilterDateField}
-                            />
-                            <TextField
-                                name='diagnosis'
-                                value={diagnosis}
-                                placeholder='Диагноз'
-                                className='Appointments-FilterField'
-                                onChange={this.onChangeFilterField}
-                            />
-                            <TextField
-                                name='clientName'
-                                value={clientName}
-                                placeholder='Клиент'
-                                className='Appointments-FilterField'
-                                onChange={this.onChangeFilterField}
-                            />
-                            <CheckboxField
-                                name='onlyMe'
-                                label='Только я'
-                                value={onlyMe}
-                                className='Appointments-FilterField'
-                                onChange={this.onChangeFilterField}
-                            />
-                        </Form>
-                    </div>
-                    <Table
-                        data={filtered}
-                        className='AppointmentList'
-                        columns={columns}
-                    />
+    return (
+        <div className='Appointments'>
+            <Header
+                title={TITLE}
+                userName={USER}
+                className='Appointments-Header'
+                bodyClassName='Appointments-HeaderBody'
+                renderIcon={() => (
+                    <img src={appointment} className='Header-Icon' />
+                )}
+            />
+            <div className='Appointments-Body'>
+                <div className='Appointments-Filter'>
+                    <Form className='Appointments-FilterForm'>
+                        <DateField
+                            hasTime
+                            className='Appointments-FilterField'
+                            onChange={onChangeFilterDateField}
+                        />
+                        <TextField
+                            name='diagnosis'
+                            value={diagnosis}
+                            placeholder='Диагноз'
+                            className='Appointments-FilterField'
+                            onChange={onChangeFilterField}
+                        />
+                        <TextField
+                            name='clientName'
+                            value={clientName}
+                            placeholder='Клиент'
+                            className='Appointments-FilterField'
+                            onChange={onChangeFilterField}
+                        />
+                        <CheckboxField
+                            name='onlyMe'
+                            label='Только я'
+                            value={onlyMe}
+                            className='Appointments-FilterField'
+                            onChange={onChangeFilterField}
+                        />
+                    </Form>
                 </div>
+                <Table
+                    data={filtered}
+                    className='AppointmentList'
+                    columns={columns}
+                />
             </div>
-        )
-    }
+        </div>
+    )
 }
