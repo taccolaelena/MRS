@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import {
   Route,
@@ -11,20 +11,17 @@ import './App.scss';
 import Home from './components/Home/Home';
 import Appointments from './components/Appointments/Appointments';
 
-class App extends Component {
-  render() {
-    const { history } = this.props;
+export default function App(props) {
+  const { history } = props;
 
-    return (
-      <div className='App'>
-        <Switch>
-          <Route history={history} path='/home' component={Home} />
-          <Route history={history} path='/appointments' component={Appointments} />
-          <Redirect from='/' to='/home' />
-        </Switch>
-      </div>
-    );
-  }
+  return (
+    <div className='App'>
+      <Switch>
+        <Route history={history} path='/home' component={Home} />
+        <Route history={history} path='/appointments' component={Appointments} />
+        <Redirect from='/' to='/home' />
+      </Switch>
+    </div>
+  );
 }
 
-export default App;

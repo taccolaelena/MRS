@@ -1,56 +1,37 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import cn from 'classnames'
-import PropTypes from 'prop-types'
 import { Label, Input, FormGroup } from 'reactstrap'
 
 import './CheckboxField.scss'
 
-class CheckboxField extends Component {
-
-    static propTypes = {
-        name: PropTypes.string,
-        label: PropTypes.string,
-        value: PropTypes.bool,
-        className: PropTypes.string,
-        onChange: PropTypes.func
-    }
-
-    static defaultProps = {
-        value: false,
-        onChange: function () { }
-    }
-
-    onChange = e => {
+export default function CheckboxField(props) {
+    const onChange = e => {
         const value = e.target.checked
-        const { name, onChange: cb } = this.props
+        const { name, onChange: cb } = props
         cb(name, value)
-    }
+    };
 
-    render() {
-        const {
-            label,
-            value,
-            className
-        } = this.props
+    const {
+        label,
+        value,
+        className
+    } = props;
 
-        return (
-            <FormGroup check className={cn('CheckboxField', className)}>
-                <Label
-                    check
-                    onClick={this.onClick}
-                    className='CheckboxField-Label'>
-                    <Input
-                        type='checkbox'
-                        value={value}
-                        onClick={this.onChange}
-                        className='CheckboxField-Checkbox'
-                    />
-                    {label}
-                </Label>
-            </FormGroup>
-        )
-    }
+    return (
+        <FormGroup check className={cn('CheckboxField', className)}>
+            <Label
+                check
+                className='CheckboxField-Label'>
+                <Input
+                    type='checkbox'
+                    value={value}
+                    onClick={onChange}
+                    className='CheckboxField-Checkbox'
+                />
+                {label}
+            </Label>
+        </FormGroup>
+    )
 }
 
-export default CheckboxField;
