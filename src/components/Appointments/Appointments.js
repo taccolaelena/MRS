@@ -91,7 +91,7 @@ export default function Appointments() {
         );
     }
 
-    const onChangeFilterDateField = (name, value) => {
+    const onChangeFilterDateField = (value) => {
         const startDate = value[0].format();
         const endDate = value[1].format();
         setFilter(

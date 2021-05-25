@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link } from "react-router-dom"
 import './Home.scss'
 
@@ -25,30 +25,27 @@ const SECTIONS = [
   { title: 'Сотрудники', href: '/employees', icon: employees }
 ];
 
-export default class Home extends Component {
-
-  render() {
-    return (
-      <div className='Home'>
-        <Header
-          title={TITLE}
-          userName='Иванов Иван Иванович'
-          className='Home-Header'
-          renderIcon={() => (
-            <img src={house} alt='house' className='Header-Icon' />
-          )}
-        />
-        <div className='Home-Body'>
-          <div className='SectionNavigation'>
-            {SECTIONS.map(({ title, href, icon }, index) => (
-              <Link className='SectionNavigation-Item Section' to={href}>
-                <img src={icon} className='Section-Icon' />
-                <span className='Section-Title'>{title}</span>
-              </Link>
-            ))}
-          </div>
+export default function Home() {
+  return (
+    <div className='Home'>
+      <Header
+        title={TITLE}
+        userName='Иванов Иван Иванович'
+        className='Home-Header'
+        renderIcon={() => (
+          <img src={house} alt='house' className='Header-Icon' />
+        )}
+      />
+      <div className='Home-Body'>
+        <div className='SectionNavigation'>
+          {SECTIONS.map(({ title, href, icon }, index) => (
+            <Link className='SectionNavigation-Item Section' to={href}>
+              <img src={icon} className='Section-Icon' />
+              <span className='Section-Title'>{title}</span>
+            </Link>
+          ))}
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
