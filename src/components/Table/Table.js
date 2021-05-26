@@ -23,7 +23,9 @@ export default function Table(props) {
         hasBorders,
         hasHover,
         noDataText,
-    } = props
+    } = props;
+
+console.log("4444444444444444", data, columns, keyField);
 
     return (
         <div className={cn('TableContainer', containerClass)}>

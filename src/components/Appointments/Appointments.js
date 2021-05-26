@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 
 import Moment from 'react-moment'
 
@@ -75,12 +75,14 @@ export default function Appointments() {
 
     const [data, setData] = useState(null);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
+        console.log("55555")
         fetch('http://localhost:3001/api/appointments')
             .then((response) => {
                 return response.json();
             })
             .then((res) => {
+                console.log("!!!!!!!!", res);
               setData(res);  
             });
     });
@@ -161,6 +163,7 @@ export default function Appointments() {
                     data={filtered}
                     className='AppointmentList'
                     columns={columns}
+                    keyField='id'
                 />
             </div>
         </div>
