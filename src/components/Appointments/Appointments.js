@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Moment from 'react-moment'
 
@@ -75,17 +75,16 @@ export default function Appointments() {
 
     const [data, setData] = useState(null);
 
-    useLayoutEffect(() => {
-        console.log("55555")
+    useEffect(() => {
         fetch('http://localhost:3001/api/appointments')
             .then((response) => {
                 return response.json();
             })
             .then((res) => {
-                console.log("!!!!!!!!", res);
               setData(res);  
-            });
-    });
+            })
+            .catch(err => console.log("Произошла ошибка: ", err)); // Обработка ошибки получения данных с бэка
+    }, []); // Пустой массив [] означает, что мы должны выполнить этот useEffect только 1 раз при рендере компонента Appointments
 
     const onChangeFilterField = (name, value) => {
         setFilter(
@@ -125,7 +124,7 @@ export default function Appointments() {
                 className='Appointments-Header'
                 bodyClassName='Appointments-HeaderBody'
                 renderIcon={() => (
-                    <img src={appointment} className='Header-Icon' />
+                    <img src={appointment} className='Header-Icon' alt='appointment'/> // Добавил alt, чтобы не было ворнинга
                 )}
             />
             <div className='Appointments-Body'>

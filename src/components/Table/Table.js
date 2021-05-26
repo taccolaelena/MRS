@@ -5,13 +5,9 @@ import BootstrapTable from 'react-bootstrap-table-next'
 
 import './Table.scss'
 
-const NO_DATA_TEXT = 'Данных нет'
+const NO_DATA_TEXT = 'Данных нет';
 
 export default function Table(props) {
-    const getRowStyle = (row, rowIndex) => {
-        return props.getRowStyle(row, rowIndex)
-    }
-
     const {
         data,
         columns,
@@ -25,11 +21,9 @@ export default function Table(props) {
         noDataText,
     } = props;
 
-console.log("4444444444444444", data, columns, keyField);
-
     return (
         <div className={cn('TableContainer', containerClass)}>
-            <BootstrapTable
+            {data ? <BootstrapTable // смотрим, есть ли что-то в "data" - если да, то рендерим таблицу, иначе, показываем текст NO_DATA_TEXT
                 expandRow={expandRow}
                 data={data}
                 columns={columns}
@@ -39,9 +33,8 @@ console.log("4444444444444444", data, columns, keyField);
                 striped={isStriped}
                 hover={hasHover}
                 bordered={hasBorders}
-                rowStyle={getRowStyle}
                 noDataIndication={noDataText}
-            />
+            /> : <div>{NO_DATA_TEXT}</div>} 
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {Button} from 'antd';
 import cn from 'classnames';
 
 import './Header.scss';
@@ -10,7 +10,7 @@ export default function Header(props) {
     userName,
     className,
     renderIcon
-  } = props
+  } = props;
 
   return (
     <div className={cn('Header', className)}>
@@ -27,9 +27,10 @@ export default function Header(props) {
               {userName}
             </div>
           )}
-          <a className='btn btn-primary Header-ExitBtn'>
+          {/* Заменил ссылку на Button, который взял из либы 'antd' */}
+          <Button className='btn btn-primary Header-ExitBtn'>
             Выйти
-            </a>
+          </Button>
         </div>
       </div>
     </div>

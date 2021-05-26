@@ -40,7 +40,7 @@ export default function Home() {
         <div className='SectionNavigation'>
           {SECTIONS.map(({ title, href, icon }, index) => (
             <Link className='SectionNavigation-Item Section' to={href}>
-              <img src={icon} className='Section-Icon' />
+              <img src={icon} className='Section-Icon' alt='home'/>
               <span className='Section-Title'>{title}</span>
             </Link>
           ))}
